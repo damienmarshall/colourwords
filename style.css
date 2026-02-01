@@ -1,0 +1,287 @@
+:root {
+    --bg-color: #f0f4f8;
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-color: #1a2a3a;
+    --accent-color: #4facfe;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background Decorative Elements */
+.background-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.circle-1 {
+    width: 400px;
+    height: 400px;
+    background: #ff9a9e;
+    top: -100px;
+    left: -100px;
+}
+
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    background: #a1c4fd;
+    bottom: -50px;
+    right: -50px;
+}
+
+.circle-3 {
+    width: 250px;
+    height: 250px;
+    background: #c2e9fb;
+    top: 40%;
+    left: 60%;
+}
+
+/* Main Container */
+.game-container {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.score-card {
+    background: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Word Display */
+.word-display {
+    margin-bottom: 2.5rem;
+}
+
+#irish-word {
+    font-size: 4.5rem;
+    font-weight: 400;
+    color: #ff6b6b;
+    text-shadow:
+        2px 2px 0px #ee5253,
+        4px 4px 0px rgba(0, 0, 0, 0.1),
+        -1px -1px 2px rgba(255, 255, 255, 0.8) inset;
+    background: linear-gradient(135deg, #ff9a9e 0%, #ff6b6b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    padding: 0.5rem;
+}
+
+/* Options */
+.options-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.color-option {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid white;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.color-option:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.color-option:active {
+    transform: scale(0.95);
+}
+
+/* Feedback Area */
+.feedback-area {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+#feedback-text {
+    font-size: 2.5rem;
+    font-family: 'Baby Gemoy', sans-serif;
+    display: inline-block;
+}
+
+.feedback-wrong {
+    color: #ff4d4d;
+    animation: shake 0.5s ease-in-out;
+}
+
+.feedback-correct {
+    color: #2ecc71;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: explosion 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.shake-container {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    border-radius: 2px;
+    animation: burst 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* Animations */
+@keyframes explosion {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(3.5) rotate(-15deg);
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+
+    60% {
+        transform: scale(3.2) rotate(10deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(5) rotate(0deg);
+        opacity: 0;
+    }
+}
+
+@keyframes burst {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(-50% + var(--dest-x)), calc(-50% + var(--dest-y))) rotate(var(--rotation)) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-10px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(10px);
+    }
+}
+
+
+/* Mobile adjustments */
+@media (max-width: 400px) {
+    .options-container {
+        gap: 1rem;
+    }
+
+    .color-option {
+        width: 65px;
+        height: 65px;
+    }
+
+    #irish-word {
+        font-size: 2.5rem;
+    }
+}
