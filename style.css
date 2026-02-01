@@ -5,6 +5,7 @@
     --text-color: #1a2a3a;
     --accent-color: #4facfe;
     --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --max-scale: 2.0;
 }
 
 * {
@@ -206,18 +207,18 @@ h1 {
     }
 
     40% {
-        transform: scale(3.5) rotate(-15deg);
+        transform: scale(var(--max-scale)) rotate(var(--burst-angle, -15deg));
         opacity: 1;
         filter: brightness(1.2);
     }
 
     60% {
-        transform: scale(3.2) rotate(10deg);
+        transform: scale(calc(var(--max-scale) * 0.8)) rotate(calc(var(--burst-angle, -15deg) * -0.5));
         opacity: 1;
     }
 
     100% {
-        transform: scale(5) rotate(0deg);
+        transform: scale(calc(var(--max-scale) * 1.1)) rotate(0deg);
         opacity: 0;
     }
 }
@@ -225,7 +226,6 @@ h1 {
 @keyframes burst {
     0% {
         transform: translate(-50%, -50%) scale(0);
-        opacity: 1;
     }
 
     100% {
@@ -283,5 +283,13 @@ h1 {
 
     #irish-word {
         font-size: 2.5rem;
+    }
+
+    #feedback-text {
+        font-size: 1.1rem;
+    }
+
+    :root {
+        --max-scale: 1.3;
     }
 }
